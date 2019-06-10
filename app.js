@@ -27,16 +27,16 @@ var bodyParser = require('body-parser'),
 
 
 
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://admin:%40thand0l2@molowehou-y3ip2.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(uri, {
-    useNewUrlParser: true
-});
-client.connect(err => {
-    //const collection = client.db("test").collection("devices");
-    // perform actions on the collection object
-    client.close();
-});
+// const MongoClient = require('mongodb').MongoClient;
+// const uri = "mongodb+srv://admin:%40thand0l2@molowehou-y3ip2.mongodb.net/test?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, {
+//     useNewUrlParser: true
+// });
+// client.connect(err => {
+//     const collection = client.db("test").collection("devices");
+//     // perform actions on the collection object
+//     client.close();
+// });
 
 
 
