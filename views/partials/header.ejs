@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Customers App</title>
+    <link rel="stylesheet" type="text/css" href="/semantic/semantic.min.css">
+</head>
+
+<body>
+    <div class="ui inverted menu">
+        <a class="active item" href="/">
+            Home
+        </a>
+        <a class="item" href="/customers/new">
+            ADD NEW
+        </a>
+        <a class="item">
+            Orders
+        </a>
+
+
+
+        <% if(!currentUser){ %>
+        <a class="item" href="/register">
+            Register
+        </a>
+
+        <a class="item" href="/login">
+            Login
+        </a>
+
+
+        <% } else { %>
+
+        <a class="item">
+            <%= currentUser.username %>
+        </a>
+
+        <a class="item" href="/logout">
+            Logout
+        </a>
+
+        <% } %>
+
+
+
+    </div>
