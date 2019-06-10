@@ -20,9 +20,29 @@ var bodyParser = require('body-parser'),
 //    b) enabling body parser to enable the collection of data from submitted forms
 //    c) Initialize Passport  for authentication
 //=========================================================================================================================================
-mongoose.connect('mongodb://localhost:27017/MolowehouDB', {
+
+// mongoose.connect('mongodb://localhost:27017/MolowehouDB', {
+//     useNewUrlParser: true
+// });
+
+
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://admin:%40thand0l2@molowehou-y3ip2.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, {
     useNewUrlParser: true
 });
+client.connect(err => {
+    //const collection = client.db("test").collection("devices");
+    // perform actions on the collection object
+    client.close();
+});
+
+
+
+
+
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
