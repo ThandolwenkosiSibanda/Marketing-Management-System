@@ -5,11 +5,24 @@ var bodyParser = require('body-parser'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     express = require('express'),
-    app = express(),
-    User = require('./Models/User');
+    app = express();
 
 
+// =======================================================================================================================================
+//  Include and register all Models
+// 1. User
+// 2. Clients
+//=========================================================================================================================================
+var User = require('./models/User'),
+    Clients = require('./models/Client');
 
+// =======================================================================================================================================
+//  Include and register all Routes
+// 1. User
+// 2. Clients
+//=========================================================================================================================================
+var clientsRoutes = require('./routes/clients');
+var indexRoutes = require('./routes/index');
 
 
 // =======================================================================================================================================
@@ -21,9 +34,9 @@ var bodyParser = require('body-parser'),
 //    c) Initialize Passport  for authentication
 //=========================================================================================================================================
 
-// mongoose.connect('mongodb://localhost:27017/MolowehouDB', {
-//     useNewUrlParser: true
-// });
+mongoose.connect('mongodb://localhost:27017/MolowehouDB', {
+    useNewUrlParser: true
+});
 
 
 
@@ -39,13 +52,11 @@ var bodyParser = require('body-parser'),
 // });
 
 
-
-
-
-
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
@@ -81,41 +92,17 @@ app.use(function (req, res, next) {
 // 1. Define The Schema For the Objects Basically how the object is structured
 // 2. Tie the schema to the Model (The database)
 //==========================================================================================================================================
-var CustomerSchema = new mongoose.Schema({
-    name: String,
-    age: Number
-});
-
-var Customer = mongoose.model('Customer', CustomerSchema);
 
 
-// =======================================================================================================================================
-//  Restful Routes 
-//=========================================================================================================================================
+// var CustomerSchema = new mongoose.Schema({
+//     name: String,
+//     age: Number
+// });
 
-// =============
-//  Index
-//==============
+// var Customer = mongoose.model('Customer', CustomerSchema);
 
-app.get('/', function (req, res) {
-    Customer.find({}, function (err, customers) {
-        if (err) {
-            console.log("ERROR! in Retrieving Data From The Database")
-        } else {
-            res.render('index', {
-                customers: customers
-            });
 
-        }
-    });
 
-});
-// =============
-//  New
-//==============
-app.get('/customers/new', function (req, res) {
-    res.render('new');
-});
 
 
 // ========================================================================
@@ -123,54 +110,6 @@ app.get('/customers/new', function (req, res) {
 //=========================================================================
 app.get('/secret', isLoggedin, function (req, res) {
     res.render('secret');
-});
-
-
-// ========================================================================
-//  Auth Routes
-//=========================================================================
-
-//Register Route
-app.get('/register', function (req, res) {
-    res.render('register');
-});
-
-//handling users Registration
-app.post('/register', function (req, res) {
-
-    var newUser = new User({
-        username: req.body.username
-    });
-
-    User.register(newUser, req.body.password, function (err, user) {
-        if (err) {
-            console.log(err);
-            return res.render('register');
-        }
-        passport.authenticate("local")(req, res, function () {
-            res.redirect("/secret");
-        });
-
-    });
-});
-
-
-//Login Route
-app.get('/login', function (req, res) {
-    res.render('login');
-});
-
-//handling users Logins
-app.post('/login', passport.authenticate("local", {
-    successRedirect: "/secret",
-    failureRedirect: "/login"
-}), function (req, res) {});
-
-
-
-app.get('/logout', function (req, res) {
-    req.logOut();
-    res.redirect('/');
 });
 
 
@@ -192,6 +131,11 @@ function isLoggedin(req, res, next) {
 }
 
 
+
+
+
+app.use(clientsRoutes);
+app.use(indexRoutes);
 
 // =======================================================================================================================================
 //  Start the Database at a Specified Port eg. port 3000 
