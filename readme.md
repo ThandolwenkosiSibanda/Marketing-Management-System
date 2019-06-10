@@ -73,3 +73,12 @@ app.listen(3000, function (err, message) {
         console.log("Database Successfully started")
     }
 });
+
+
+
++++++++++++++++++++++++++++++++++++++++++==
+Code for Reverting Back The commits in Gits
+
+git revert --no-commit CommitId..HEAD
+
+
