@@ -12,17 +12,23 @@ var bodyParser = require('body-parser'),
 //  Include and register all Models
 //    1. User
 //    2. Clients
+//    3.Visits
 //=========================================================================================================================================
 var User = require('./models/User'),
-    Clients = require('./models/Client');
+    Clients = require('./models/Client'),
+    Visit = require('./models/Visit'),
+    Region = require('./models/Region');
 
 // =======================================================================================================================================
 //  Include all Routes But they will be called at the very end
 //    1. User
 //    2. Clients
+//    3. Visits
 //=========================================================================================================================================
 var clientsRoutes = require('./routes/clients'),
-    indexRoutes = require('./routes/index');
+    indexRoutes = require('./routes/index'),
+    visitsRoutes = require('./routes/visits'),
+    regionsRoutes = require('./routes/regions');
 
 
 // =======================================================================================================================================
@@ -38,6 +44,8 @@ var clientsRoutes = require('./routes/clients'),
 mongoose.connect('mongodb://localhost:27017/MarketingManagementSystemDB', {
     useNewUrlParser: true
 });
+
+
 
 
 
@@ -121,6 +129,8 @@ function isLoggedin(req, res, next) {
 
 app.use(clientsRoutes);
 app.use(indexRoutes);
+app.use(visitsRoutes);
+app.use(regionsRoutes);
 
 // =======================================================================================================================================
 //  Start the Database at a Specified Port eg. port 3000 
