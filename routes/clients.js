@@ -1,4 +1,4 @@
-var client = require('../models/Client'),
+var Client = require('../models/Client'),
     express = require('express');
 
 var router = express.Router();
@@ -9,17 +9,16 @@ var router = express.Router();
 //============================================================================================================================================
 
 router.get('/clients', function (req, res) {
-    // Client.find({}, function (err, clients) {
-    //     if (err) {
-    //         console.log("ERROR! in Retrieving Data From The Database")
-    //     } else {
-    //         res.render('index', {
-    //             clients: clients
-    //         });
+    Client.find({}, function (err, clients) {
+        if (err) {
+            console.log("ERROR! in Retrieving Data From The Database")
+        } else {
+            res.render('client/index', {
+                clients: clients
+            });
 
-    //     }
-    // });
-    res.send('Show All The Clients ');
+        }
+    });
 
 });
 
@@ -37,7 +36,14 @@ router.get('/clients/new', function (req, res) {
 //  Save the Details of a new client
 //============================================================================================================================================
 router.post('/clients/', function (req, res) {
-    res.send('Store');
+    var client = req.body.client;
+
+    Client.create(client, function (err, newCustomer) {
+        if (err) {
+            return res.redirect('/clients/new');
+        }
+        res.redirect('/clients');
+    });
 });
 
 

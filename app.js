@@ -35,7 +35,7 @@ var clientsRoutes = require('./routes/clients'),
 //    d) Initialize Passport  for authentication
 //=========================================================================================================================================
 
-mongoose.connect('mongodb://localhost:27017/MolowehouDB', {
+mongoose.connect('mongodb://localhost:27017/MarketingManagementSystemDB', {
     useNewUrlParser: true
 });
 

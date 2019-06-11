@@ -19,9 +19,9 @@ var ClientSchema = new mongoose.Schema({
     contactPhone: String,
     contactAltPhone: String,
     contactEmail: String,
-    Category: String,
+    category: String,
     region: String,
-    specialNote: String,
+    specialNotes: String,
     visits: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Visit"

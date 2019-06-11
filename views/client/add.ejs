@@ -1,69 +1,113 @@
   <% include ../partials/header.ejs %>
 
   <div class="container">
-      <form>
-          <div class="form-row">
-              <div class="form-group col-md-6">
-                  <label for="inputEmail4">Client Name</label>
-                  <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+      <form action="/clients" method="POST">
+          <div class="border form-divide-outer">
+              <div class="form-header">
+                  <h3 class="text-center">Add New Client</h3>
               </div>
-          </div>
 
-          <div class="form-group">
-              <label for="inputAddress">Address</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-          </div>
-          <div class="form-row">
-              <div class="form-group col-md-4">
-                  <label for="inputEmail4">Phone No.</label>
-                  <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-              </div>
-              <div class="form-group col-md-4">
-                  <label for="inputPassword4">Alternative Phone No.</label>
-                  <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-              </div>
-              <div class="form-group col-md-4">
-                  <label for="inputPassword4">Email</label>
-                  <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-              </div>
-          </div>
+              <div class="border form-divide-inner">
+                  <h5><strong>Organisation Details</strong></h5>
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label for="name">Name</label>
+                          <input type="text" name="client[name]" id="name" class="form-control">
+                      </div>
+                  </div>
 
-          <div class="form-row">
-              <div class="form-group col-md-2">
-                  <label for="inputCity">Contact Person Title</label>
-                  <select id="inputState" class="form-control">
-                      <option selected>Choose...</option>
-                      <option>Doctor</option>
-                      <option>Mr</option>
-                      <option>Mrs</option>
-                      <option>Miss</option>
-                      <option>Pastor</option>
-                      <option>Reverend</option>
-                      <option>Professor</option>
-                  </select>
+                  <div class="form-group">
+                      <label for="address">Address</label>
+                      <input type="text" name="client[address]" id="address" class="form-control">
+                  </div>
+                  <div class="form-row">
+                      <div class="form-group col-md-4">
+                          <label for="phone">Phone No.</label>
+                          <input type="text" name="client[phone]" id="phone" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="altPhone">Alternative Phone No.</label>
+                          <input type="text" name="client[altPhone]" id="altPhone" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="email">Email</label>
+                          <input type="email" name="client[email]" id="email" class="form-control">
+                      </div>
+                  </div>
               </div>
-              <div class="form-group col-md-3">
-                  <label for="inputState">Name</label>
-                  <input type="text" class="form-control" id="inputPassword4">
+
+              <div class="border form-divide-inner">
+                  <h5><strong>Contact Person Details</strong> </h5>
+
+                  <div class="form-row">
+                      <div class="form-group col-md-2">
+                          <label for="inputCity">Title</label>
+                          <select id="contactTitle" name="client[contactTitle]" id="contactTitle" class="form-control">
+                              <option selected>Choose...</option>
+                              <option value="Doctor">Doctor</option>
+                              <option value="Mr">Mr</option>
+                              <option value="Mrs">Mrs</option>
+                              <option value="Miss">Miss</option>
+                              <option value="Pastor">Pastor</option>
+                              <option value="Reverend">Reverend</option>
+                              <option value="Proffessor">Professor</option>
+                          </select>
+                      </div>
+                      <div class="form-group col-md-3">
+                          <label for="contactName">Name</label>
+                          <input type="text" name="client[contactName]" id="contactName" class="form-control">
+                      </div>
+                      <div class="form-group col-md-3">
+                          <label for="contactSurname">Surname</label>
+                          <input type="text" name="client[contactSurname]" id="contactSurname" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="contactPhone">Phone No.</label>
+                          <input type="text" name="client[contactPhone]" id="contactPhone" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="contactAltPhone">Alt Phone No.</label>
+                          <input type="text" name="client[contactAltPhone]" id="contactAltPhone" class="form-control">
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="contactEmail">Email</label>
+                          <input type="email" name="client[contactEmail]" id="contactEmail" class="form-control">
+                      </div>
+                  </div>
               </div>
-              <div class="form-group col-md-3">
-                  <label for="inputZip">Surname</label>
-                  <input type="text" class="form-control" id="inputZip">
+              <div class="border form-divide-inner">
+                  <h5><strong>Market Details</strong> </h5>
+
+                  <div class="form-row">
+                      <div class="form-group col-md-4">
+                          <label for="region">Region Name</label>
+                          <select id="region" name="client[region]" id="region" class="form-control">
+                              <option selected>Choose...</option>
+                              <option value="Bulawayo">Bulawayo Metro</option>
+                              <option value="Beitbridge">Beitbridge</option>
+                              <option value="Vic Falls">Vic Falls</option>
+                          </select>
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="category">Market Category</label>
+                          <select id="category" name="client[category]" id="category" class="form-control">
+                              <option selected>Choose...</option>
+                              <option value="Hospital">Hospital</option>
+                              <option value="Clinic">Clinic</option>
+                              <option value="Surgery">Surgery</option>
+                          </select>
+                      </div>
+
+
+
+                      <div class="form-group col-md-12">
+                          <label for="specialNotes">Special Notes</label>
+                          <textarea class="form-control" name="client[specialNotes]" id="specialNotes" rows="3"></textarea>
+                      </div>
+                  </div>
               </div>
-              <div class="form-group col-md-4">
-                  <label for="inputZip">Phone No.</label>
-                  <input type="text" class="form-control" id="inputZip">
-              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
           </div>
-          <div class="form-group">
-              <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck">
-                  <label class="form-check-label" for="gridCheck">
-                      Check me out
-                  </label>
-              </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 
 
