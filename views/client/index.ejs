@@ -1,0 +1,14 @@
+  <% include ../partials/header.ejs %>
+
+
+  <h4>All The Clients</h4>
+
+
+  <% customers.forEach(function(customer){ %>
+  <div>
+      <%= customer.name %>
+  </div>
+  <% }); %>
+
+
+  <% include ../partials/footer.ejs %>
