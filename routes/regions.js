@@ -1,4 +1,5 @@
 var Region = require('../models/Region'),
+    Client = require('../models/Client'),
     express = require('express');
 
 var router = express.Router();
@@ -52,7 +53,33 @@ router.post('/regions/', function (req, res) {
 //  Display the Full Details of a client
 //============================================================================================================================================
 router.get('/regions/:id', function (req, res) {
-    res.send('Show the Client Full Details');
+    var id = req.params.id;
+    Region.findById(id, function (err, foundRegion) {
+        if (err) {
+            return res.redirect('/regions');
+        }
+
+
+
+        Client.find({
+            region: foundRegion.name
+
+        }, function (err, foundClients) {
+            if (err) {
+                return res.redirect('/regions');
+            }
+
+            res.render('region/show', {
+                region: foundRegion,
+                clients: foundClients
+            });
+
+        });
+
+
+
+    });
+
 });
 
 

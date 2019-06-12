@@ -1,5 +1,6 @@
 var Visit = require('../models/Visit'),
-    express = require('express');
+    express = require('express'),
+    Client = require('../models/Client');
 
 var router = express.Router();
 
@@ -42,7 +43,19 @@ router.post('/visits/', function (req, res) {
         if (err) {
             return res.redirect('/visits/new');
         }
-        res.redirect('/visits');
+        Client.findById('5cff97fac8ef6e52a4304a24', function (err, foundClient) {
+            foundClient.visits.push(newVisit);
+            foundClient.save(function (err, data) {
+                if (err) {
+                    console.log(err);
+                    return res.redirect('/visits');
+                } else {
+                    console.log(data);
+                    return res.redirect('/visits');
+                }
+            });
+        });
+
     });
 });
 
