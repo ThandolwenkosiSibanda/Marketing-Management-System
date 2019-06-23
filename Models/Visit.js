@@ -8,7 +8,10 @@ var mongoose = require('mongoose');
 //==========================================================================================================================================
 
 var VisitSchema = new mongoose.Schema({
-
+    client: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Client"
+    },
     contactTitle: String,
     contactName: String,
     contactSurname: String,
@@ -20,10 +23,6 @@ var VisitSchema = new mongoose.Schema({
     samplesGiven: String,
     visitNotes: String,
     nextVisitDate: String,
-    customerId: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Client"
-    }],
 
 
 });

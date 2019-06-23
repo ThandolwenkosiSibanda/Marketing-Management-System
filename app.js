@@ -17,7 +17,8 @@ var bodyParser = require('body-parser'),
 var User = require('./models/User'),
     Clients = require('./models/Client'),
     Visit = require('./models/Visit'),
-    Region = require('./models/Region');
+    Region = require('./models/Region'),
+    Category = require('./models/Category');
 
 // =======================================================================================================================================
 //  Include all Routes But they will be called at the very end
@@ -28,7 +29,8 @@ var User = require('./models/User'),
 var clientsRoutes = require('./routes/clients'),
     indexRoutes = require('./routes/index'),
     visitsRoutes = require('./routes/visits'),
-    regionsRoutes = require('./routes/regions');
+    regionsRoutes = require('./routes/regions'),
+    categoriesRoutes = require('./routes/categories');
 
 
 // =======================================================================================================================================
@@ -131,6 +133,7 @@ app.use(clientsRoutes);
 app.use(indexRoutes);
 app.use(visitsRoutes);
 app.use(regionsRoutes);
+app.use(categoriesRoutes);
 
 // =======================================================================================================================================
 //  Start the Database at a Specified Port eg. port 3000 

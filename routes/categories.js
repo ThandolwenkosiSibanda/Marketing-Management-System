@@ -1,26 +1,25 @@
-var Client = require('../models/Client'),
-    Category = require('../models/Category'),
+var Category = require('../models/Category'),
     Region = require('../models/Region'),
+    Client = require('../models/Client'),
     express = require('express');
 
 var router = express.Router();
 
 // ===========================================================================================================================================
 //  Index
-// To Display All the Clients in the Database For A Given Region and Category
+// To Display All the categories in the Database For A Given Region and Category
 //============================================================================================================================================
 
-router.get('/clients', function (req, res) {
-    Client.find({}).populate('region').populate('category').exec(function (err, clients) {
+router.get('/categories', function (req, res) {
+    Category.find({}, function (err, categories) {
         if (err) {
             console.log("ERROR! in Retrieving Data From The Database")
         } else {
-            res.render('client/index', {
-                clients: clients
+            res.render('category/index', {
+                categories: categories
             });
 
         }
-
     });
 
 });
@@ -30,68 +29,44 @@ router.get('/clients', function (req, res) {
 //  Create- New
 // Show The Form For Creating A new Client
 //============================================================================================================================================
-router.get('/clients/new', function (req, res) {
-    Category.find({}, function (err, categories) {
-        if (err) {
-            console.log("Check That the system is on");
-        } else {
-            Region.find({}, function (err, regions) {
-                res.render('client/add', {
-                    categories: categories,
-                    regions: regions,
-
-                });
-            });
-
-        }
-    });
+router.get('/categories/new', function (req, res) {
+    res.render('category/add');
 });
 
 // ===========================================================================================================================================
 //  Store
 //  Save the Details of a new client
 //============================================================================================================================================
-router.post('/clients/', function (req, res) {
-    var client = req.body.client;
-    Client.create(client, function (err, newCustomer) {
+router.post('/categories/', function (req, res) {
+    var category = req.body.category;
+
+    Category.create(category, function (err, newCategory) {
         if (err) {
-            return res.redirect('/clients/new');
-        } else {
-            newCustomer.save(function (err, data) {
-                if (err) {
-                    console.log(err);
-                    return res.redirect('/clients');
-                } else {
-                    res.redirect('/clients');
-                }
-
-
-            });
-
-
+            return res.redirect('/categories/new');
         }
-
-
+        res.redirect('/categories');
     });
 });
 
 
 // ===========================================================================================================================================
 //  Show
-//  Display the Full Details of a client
+//  Display the Full Details of the region Category Client
 //============================================================================================================================================
-router.get('/clients/:id', function (req, res) {
+router.get('/categories/:id', function (req, res) {
     var id = req.params.id;
 
-    Client.findById(id).populate('region').populate('category').populate('visits').exec(function (err, foundClient) {
+    Category.findById(id, function (err, foundCategory) {
         if (err) {
             console.log('error');
-        } else {
-            res.render('client/show', {
-                client: foundClient
-            });
         }
+        res.render('category/show', {
+            category: foundCategory
+        });
+
     });
+
+
 
 });
 
@@ -100,7 +75,7 @@ router.get('/clients/:id', function (req, res) {
 //  Edit
 //  Show the Edit Form For The Client
 //============================================================================================================================================
-router.get('/clients/:id/edit', function (req, res) {
+router.get('/categories/:id/edit', function (req, res) {
     res.send('Show The Form for edit');
 });
 
@@ -109,7 +84,7 @@ router.get('/clients/:id/edit', function (req, res) {
 //  Update
 //  Update the Details of the Client
 //============================================================================================================================================
-router.post('/clients/:id', function (req, res) {
+router.post('/categories/:id', function (req, res) {
     //Method PUT
     res.send('Show The Form for edit');
 });
@@ -118,7 +93,7 @@ router.post('/clients/:id', function (req, res) {
 // ===========================================================================================================================================
 //  Destroy
 //============================================================================================================================================
-router.post('/clients/:id', function (req, res) {
+router.post('/categories/:id', function (req, res) {
     //Method DELETE
     res.send('Delete the ');
 });

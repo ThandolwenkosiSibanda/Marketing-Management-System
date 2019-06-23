@@ -19,13 +19,19 @@ var ClientSchema = new mongoose.Schema({
     contactPhone: String,
     contactAltPhone: String,
     contactEmail: String,
-    category: String,
-    region: String,
+    category: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category'
+    },
+    region: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Region'
+    },
     specialNotes: String,
     visits: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Visit"
-    }],
+    }]
 
 
 });

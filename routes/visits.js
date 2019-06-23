@@ -28,29 +28,37 @@ router.get('/visits', function (req, res) {
 //  Create- New
 // Show The Form For Creating A new Client
 //============================================================================================================================================
-router.get('/visits/new', function (req, res) {
-    res.render('visit/add');
+router.get('/clients/:client_id/visits/new', function (req, res) {
+    var client_id = req.params.client_id;
+    Client.findById(client_id).populate('region').populate('category').populate('visits').exec(function (err, foundClient) {
+        if (err) {
+            console.log('error');
+        } else {
+            res.render('visit/add', {
+                client: foundClient
+            });
+        }
+    });
 });
 
 // ===========================================================================================================================================
 //  Store
 //  Save the Details of a new client
 //============================================================================================================================================
-router.post('/visits/', function (req, res) {
+router.post('/visits', function (req, res) {
     var visit = req.body.visit;
-
+    var id = req.body.visit.client;
     Visit.create(visit, function (err, newVisit) {
         if (err) {
             return res.redirect('/visits/new');
         }
-        Client.findById('5cff97fac8ef6e52a4304a24', function (err, foundClient) {
+        Client.findById(id, function (err, foundClient) {
             foundClient.visits.push(newVisit);
             foundClient.save(function (err, data) {
                 if (err) {
                     console.log(err);
                     return res.redirect('/visits');
                 } else {
-                    console.log(data);
                     return res.redirect('/visits');
                 }
             });
@@ -66,6 +74,7 @@ router.post('/visits/', function (req, res) {
 //============================================================================================================================================
 router.get('/visits/:id', function (req, res) {
     res.send('Show the Client Full Details');
+
 });
 
 
@@ -75,6 +84,8 @@ router.get('/visits/:id', function (req, res) {
 //============================================================================================================================================
 router.get('/visits/:id/edit', function (req, res) {
     res.send('Show The Form for edit');
+
+
 });
 
 

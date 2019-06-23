@@ -7,192 +7,23 @@
       <div class="row">
 
           <div class="col-sm-12 border pt-sm-2">
-              <h4><%= region.name %></h4>
+              <h4>Region :<%= region.name %></h4>
               <div class="row">
 
                   <div class="col-sm-3 border pt-sm-2 ">
 
 
                       <ul class="list-group mt-sm-2" id="myTab">
-                          <li class="list-group-item"><a href="/Pharmacies">Pharmacies</a></li>
-                          <li class="list-group-item"><a href="#Clinics" data-toggle="tab">Clinics</a></li>
-                          <li class="list-group-item"><a href="#Centres" data-toggle="tab">Medical Centres</a></li>
-                          <li class="list-group-item"><a href="#Surgeries" data-toggle="tab">Surgeries</a></li>
-                          <li class="list-group-item"><a href="#Hospitals" data-toggle="tab">Hospitals</a></li>
-                          <li class="list-group-item"><a href="#Doctors" data-toggle="tab">Doctors</a></li>
+                          <% categories.forEach(function(category){ %>
+                          <li class="list-group-item"><a href="/regions/<%= region._id %>/categories/<%= category._id %>"><%= category.name %></a></li>
+                          <% }); %>
+
                       </ul>
 
                   </div>
                   <div class="col-sm-9">
                       <div id="myTabContent" class="tab-content">
                           <div class="tab-pane fade in active" id="Pharmacies">
-                              <h5>Pharmacies</h5>
-                              <table class="table table-bordered">
-                                  <thead class="thead-light">
-                                      <tr>
-                                          <th scope="col">#</th>
-                                          <th scope="col">Name</th>
-                                          <th scope="col">Email</th>
-                                          <th scope="col">Phone</th>
-
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      <tr>
-                                          <% clients.forEach(function(client) { %>
-                                          <% if(client.category === 'Pharmacy') { %>
-                                          <th scope="row"><a href="/clients/<%= client._id %>">view</a></th>
-                                          <td><%= client.name %></td>
-                                          <td><%= client.email %></td>
-                                          <td><%= client.phone %></td>
-                                          <% } %>
-                                          <% }); %>
-                                      </tr>
-                                  </tbody>
-
-                              </table>
-
-
-                          </div>
-                          <div class="tab-pane fade" id="Clinics">
-                              <h5>Clinics</h5>
-                              <table class="table table-bordered">
-                                  <thead class="thead-light">
-                                      <tr>
-                                          <th scope="col">#</th>
-                                          <th scope="col">Name</th>
-                                          <th scope="col">Email</th>
-                                          <th scope="col">Phone</th>
-
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      <tr>
-                                          <% clients.forEach(function(client) { %>
-                                          <% if(client.category === 'Clinic') { %>
-                                          <th scope="row"><a href="/clients/<%= client._id %>">view</a></th>
-                                          <td><%= client.name %></td>
-                                          <td><%= client.email %></td>
-                                          <td><%= client.phone %></td>
-                                          <% } %>
-                                          <% }); %>
-                                      </tr>
-                                  </tbody>
-
-                              </table>
-
-                          </div>
-                          <div class="tab-pane fade" id="Centres">
-                              <h5>Medical Centres</h5>
-                              <table class="table table-bordered">
-                                  <thead class="thead-light">
-                                      <tr>
-                                          <th scope="col">#</th>
-                                          <th scope="col">Name</th>
-                                          <th scope="col">Email</th>
-                                          <th scope="col">Phone</th>
-
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      <tr>
-                                          <% clients.forEach(function(client) { %>
-                                          <% if(client.category === 'Medical Centre') { %>
-                                          <th scope="row"><a href="/clients/<%= client._id %>">view</a></th>
-                                          <td><%= client.name %></td>
-                                          <td><%= client.email %></td>
-                                          <td><%= client.phone %></td>
-                                          <% } %>
-                                          <% }); %>
-                                      </tr>
-                                  </tbody>
-
-                              </table>
-                          </div>
-                          <div class="tab-pane fade" id="Surgeries">
-                              <h5>Surgeries</h5>
-                              <table class="table table-bordered">
-                                  <thead class="thead-light">
-                                      <tr>
-                                          <th scope="col">#</th>
-                                          <th scope="col">Name</th>
-                                          <th scope="col">Email</th>
-                                          <th scope="col">Phone</th>
-
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      <tr>
-                                          <% clients.forEach(function(client) { %>
-                                          <% if(client.category === 'Surgery') { %>
-                                          <th scope="row"><a href="/clients/<%= client._id %>">view</a></th>
-                                          <td><%= client.name %></td>
-                                          <td><%= client.email %></td>
-                                          <td><%= client.phone %></td>
-                                          <% } %>
-                                          <% }); %>
-                                      </tr>
-                                  </tbody>
-
-                              </table>
-                          </div>
-                          <div class="tab-pane fade" id="Hospitals">
-                              <h5>Hospitals</h5>
-                              <table class="table table-bordered">
-                                  <thead class="thead-light">
-                                      <tr>
-                                          <th scope="col">#</th>
-                                          <th scope="col">Name</th>
-                                          <th scope="col">Email</th>
-                                          <th scope="col">Phone</th>
-
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-
-                                      <% clients.forEach(function(client) { %>
-                                      <% if(client.category === 'Hospital') { %>
-                                      <tr>
-                                          <th scope="row"><a href="/clients/<%= client._id %>">view</a></th>
-                                          <td><%= client.name %></td>
-                                          <td><%= client.email %></td>
-                                          <td><%= client.phone %></td>
-                                      </tr>
-                                      <% } %>
-                                      <% }); %>
-                                      </tr>
-                                  </tbody>
-
-                              </table>
-                          </div>
-                          <div class="tab-pane fade" id="Doctors">
-                              <h5>Doctors</h5>
-                              <table class="table table-bordered">
-                                  <thead class="thead-light">
-                                      <tr>
-                                          <th scope="col">#</th>
-                                          <th scope="col">Name</th>
-                                          <th scope="col">Email</th>
-                                          <th scope="col">Phone</th>
-
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-
-                                      <% clients.forEach(function(client) { %>
-                                      <% if(client.category === 'Doctor') { %>
-                                      <tr>
-                                          <th scope="row"><a href="/clients/<%= client._id %>">view</a></th>
-                                          <td><%= client.name %></td>
-                                          <td><%= client.email %></td>
-                                          <td><%= client.phone %></td>
-                                      </tr>
-                                      <% } %>
-                                      <% }); %>
-                                      </tr>
-                                  </tbody>
-
-                              </table>
 
                           </div>
 

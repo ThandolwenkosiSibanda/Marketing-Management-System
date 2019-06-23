@@ -4,7 +4,8 @@
       <form action="/visits" method="POST">
           <div class="border form-divide-outer">
               <div class="form-header">
-                  <h3 class="text-center">Add New Visit: Such And Such </h3>
+                  <h3 class="text-center">New Visit: <%= client.name %> </h3>
+                  <input type="hidden" name="visit[client]" id="contactName" value="<%= client._id %>">
               </div>
 
 

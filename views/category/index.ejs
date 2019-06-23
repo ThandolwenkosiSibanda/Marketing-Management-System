@@ -1,0 +1,32 @@
+  <% include ../partials/header.ejs %>
+
+
+  <div class="container">
+      <div class="row">
+
+          <div class="col-sm-12 border pt-sm-2">
+
+              <div class="row">
+                  <% categories.forEach(function(category){ %>
+
+                  <div class="col-sm-5" style="min-height:120px; background-color:red; margin:10px;">
+                      <h5><%= category.name %></h5>
+
+                      <a class="btn btn-primary" href="/categories/<%= category._id %>">View Details</a>
+                  </div>
+
+
+                  <% }); %>
+              </div>
+
+
+
+          </div>
+      </div>
+  </div>
+
+
+
+
+
+  <% include ../partials/footer.ejs %>

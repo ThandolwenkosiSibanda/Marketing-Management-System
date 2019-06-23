@@ -1,0 +1,135 @@
+  <% include ../partials/header.ejs %>
+
+  <div class="container">
+      <form action="/clients" method="POST">
+          <div class="border form-divide-outer">
+              <div class="form-header">
+                  <h3 class="text-center"><%= client.name %></h3>
+              </div>
+
+              <div class="border form-divide-inner">
+                  <h5><strong>Organisation Details</strong></h5>
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label for="name">Name :</label>
+                          <%= client.name %>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="address">Address :</label>
+                      <%= client.address %>
+                  </div>
+                  <div class="form-row">
+                      <div class="form-group col-md-4">
+                          <label for="phone">Phone No :</label>
+                          <%= client.phone %>
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="altPhone">Alternative Phone : </label>
+                          <%= client.altPhone %>
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="email">Email : </label>
+                          <%= client.email %>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="border form-divide-inner">
+                  <h5><strong>Contact Person Details</strong> </h5>
+
+                  <div class="form-row">
+                      <div class="form-group col-md-2">
+                          <label for="inputCity">Title :</label>
+                          <%= client.contactTitle %>
+                      </div>
+                      <div class="form-group col-md-3">
+                          <label for="contactName">Name :</label>
+                          <%= client.contactName %>
+                      </div>
+                      <div class="form-group col-md-3">
+                          <label for="contactSurname">Surname :</label>
+                          <%= client.contactSurname %>
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="contactPhone">Phone No :</label>
+                          <%= client.contactPhone %>
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="contactAltPhone">Alt Phone No :</label>
+                          <%= client.contactAltPhone %>
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="contactEmail">Email : </label>
+                          <%= client.contactEmail %>
+                      </div>
+                  </div>
+              </div>
+              <div class="border form-divide-inner">
+                  <h5><strong>Market Details</strong> </h5>
+
+                  <div class="form-row">
+                      <div class="form-group col-md-4">
+                          <label for="region">Region Name :</label>
+                          <%= client.region.name %>
+                      </div>
+
+                      <div class="form-group col-md-4">
+                          <label for="category">Market Category : </label>
+                          <%= client.category.name %>
+
+                      </div>
+                      <div class="form-group col-md-12">
+                          <label for="specialNotes">Special Notes :</label>
+                          <%= client.specialNotes %>
+                      </div>
+
+                  </div>
+              </div>
+              <div class="border form-divide-inner">
+                  <h5><strong>Last 5 Visits</strong> </h5>
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">First</th>
+                              <th scope="col">Last</th>
+                              <th scope="col">Handle</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <% var ClientVisits =client.visits %>
+
+                          <% ClientVisits.forEach(function(region){ %>
+
+
+                          <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td>@mdo</td>
+                          </tr>
+                          <% }); %>
+
+                      </tbody>
+                  </table>
+
+
+
+
+
+              </div>
+          </div>
+          <a href="/clients/<%= client._id %>/edit" class="btn btn-primary">EDIT CLIENT</a>
+
+  </div>
+  </form>
+
+
+  </div>
+
+
+
+
+  <% include ../partials/footer.ejs %>
