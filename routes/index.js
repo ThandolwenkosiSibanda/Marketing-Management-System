@@ -3,6 +3,32 @@ var express = require('express'),
 
 var router = express.Router();
 var User = require('../models/User');
+var Region = require('../models/Region');
+
+
+
+// ========================================================================
+//  Dashboard Routes
+//=========================================================================
+
+//  Index
+
+router.get('/', function (req, res) {
+    Region.find({}, function (err, regions) {
+        if (err) {
+            console.log("ERROR! in Retrieving Data From The Database")
+        } else {
+            res.render('region/index', {
+                regions: regions
+            });
+
+        }
+    });
+
+});
+
+
+
 
 // ========================================================================
 //  Auth Routes

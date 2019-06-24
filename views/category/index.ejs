@@ -3,21 +3,46 @@
 
   <div class="container">
       <div class="row">
+          <h5 style="padding: 10px;"><span>Region: </span><%= region %></h5>
+          <h5 style="padding: 10px;"><span>Category: </span><%= category %></h5>
 
           <div class="col-sm-12 border pt-sm-2">
 
-              <div class="row">
-                  <% categories.forEach(function(category){ %>
 
-                  <div class="col-sm-5" style="min-height:120px; background-color:red; margin:10px;">
-                      <h5><%= category.name %></h5>
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Address</th>
+                          <th scope="col">Phone</th>
+                          <th scope="col">Contact Person</th>
+                          <th scope="col">Phone Number</th>
+                          <th scope="col">Email</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <% clients.forEach(function(client){ %>
+                      <tr>
+                          <th scope="row"><a href="/clients/<%= client._id %>">View</a></th>
+                          <td><%= client.name %></td>
+                          <td><%= client.address %></td>
+                          <td><%= client.phone %></td>
+                          <td><%= client.contactTitle%> <%= client.contactName%> <%= client.contactSurname%> </td>
+                          <td><%= client.contactPhone %></td>
+                          <td><%= client.contactEmail %></td>
 
-                      <a class="btn btn-primary" href="/categories/<%= category._id %>">View Details</a>
-                  </div>
+
+                      </tr>
+                      <% }); %>
 
 
-                  <% }); %>
-              </div>
+                  </tbody>
+              </table>
+
+
+
+
 
 
 

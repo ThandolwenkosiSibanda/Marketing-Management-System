@@ -10,17 +10,32 @@ var router = express.Router();
 // To Display All the categories in the Database For A Given Region and Category
 //============================================================================================================================================
 
-router.get('/categories', function (req, res) {
-    Category.find({}, function (err, categories) {
-        if (err) {
-            console.log("ERROR! in Retrieving Data From The Database")
-        } else {
-            res.render('category/index', {
-                categories: categories
-            });
+router.get('/regions/:region_id/categories/:category_id', function (req, res) {
+    var region_id = req.params.region_id;
+    var category_id = req.params.category_id;
 
-        }
+    Client.find({}).populate('region').populate('category').exec(function (err, clients) {
+        var filteredClients = [];
+        var region = clients[0].region.name;
+        var category = clients[0].category.name;
+
+        clients.forEach(function (client) {
+
+
+            if (client.region._id.equals(region_id) && client.category._id.equals(category_id)) {
+                filteredClients.push(client);
+            }
+
+        });
+        res.render('category/index', {
+            clients: filteredClients,
+            region: region,
+            category: category
+        });
     });
+
+
+
 
 });
 
