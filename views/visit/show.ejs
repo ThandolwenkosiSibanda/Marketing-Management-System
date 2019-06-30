@@ -1,0 +1,102 @@
+  <% include ../partials/header.ejs %>
+
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-2 border">
+              <a class="btn btn-sm btn-primary" href="/" style="margin-top: 10px;"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+              <a class="btn btn-sm btn-primary" href="/clients/<%=visit.client._id %>" style="margin-top: 10px;"><i class="fa fa-backward" aria-hidden="true"></i>Client</a>
+
+          </div>
+          <div class="col-sm-10">
+              <form action="/visits" method="POST">
+                  <div class="border form-divide-outer">
+                      <div class="form-header">
+                          <h3 class="text-center"> <%=visit.client.name %> <%= visit.visitDate %></h3>
+                          <input type="hidden" name="visit[client]" id="contactName" value="">
+                      </div>
+
+
+
+                      <div class="border form-divide-inner">
+                          <h5><strong>Contact Person Details</strong> </h5>
+
+                          <div class="form-row">
+                              <div class="form-group col-md-2">
+                                  <label for="contactTitle">Title: </label>
+                                  <%= visit.contactTitle %>
+                                  %>
+                              </div>
+                              <div class="form-group col-md-3">
+                                  <label for="contactName">Name: </label>
+                                  <%= visit.contactName %>
+                              </div>
+                              <div class="form-group col-md-3">
+                                  <label for="contactSurname">Surname:</label>
+                                  <%= visit.contactSurname %>
+                              </div>
+                              <div class="form-group col-md-4">
+                                  <label for="contactPhone">Phone No:</label>
+                                  <%= visit.contactPhone %>
+                              </div>
+                              <div class="form-group col-md-4">
+                                  <label for="contactAltPhone">Alt Phone No:</label>
+                                  <%= visit.contactAltPhone %>
+                              </div>
+                              <div class="form-group col-md-4">
+                                  <label for="contactEmail">Email: </label>
+                                  <%= visit.contactEmail %>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="border form-divide-inner">
+                          <h5><strong>Visit Details</strong> </h5>
+
+                          <div class="form-row">
+                              <div class="form-group col-md-12">
+                                  <label for="visitDate">Visit Date: </label>
+                                  <%= visit.visitDate %>
+                              </div>
+                              <div class="form-group col-md-12">
+                                  <label for="keyInterests">Key Interests: </label>
+                                  <%= visit.keyInterests %>
+                              </div>
+                              <div class="form-group col-md-12">
+                                  <label for="samplesGiven">Samples Given: </label>
+                                  <%= visit.samplesGiven %>
+                              </div>
+
+
+
+                              <div class="form-group col-md-12">
+                                  <label for="visitNotes">Visit Notes: </label>
+                                  <%= visit.visitNotes %>
+                              </div>
+
+                              <div class="form-group col-md-12">
+                                  <label for="nextVisitDate">Next Visit Scheduled: </label>
+                                  <%= visit.nextVisitDate%>
+                              </div>
+
+                          </div>
+                      </div>
+
+                      <a class="btn btn-sm btn-primary" href="/visits/<%= visit._id %>/edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>EDIT</a>
+                      <a class="btn btn-sm btn-danger pull-right" href="/visits/<%= visit._id %>/delete"></i><i class="fa fa-trash" aria-hidden="true"></i>DELETE</a>
+
+                  </div>
+              </form>
+
+
+
+
+          </div>
+
+      </div>
+
+
+  </div>
+
+
+
+
+  <% include ../partials/footer.ejs %>

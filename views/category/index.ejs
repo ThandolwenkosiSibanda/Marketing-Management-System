@@ -3,10 +3,18 @@
 
   <div class="container">
       <div class="row">
-          <h5 style="padding: 10px;"><span>Region: </span><%= region %></h5>
-          <h5 style="padding: 10px;"><span>Category: </span><%= category %></h5>
+          <!-- <h5 style="padding: 10px;"><span>Region: </span></h5>
+          <h5 style="padding: 10px;"><span>Category: </span></h5> -->
+          <div class="col-sm-12">
 
-          <div class="col-sm-12 border pt-sm-2">
+          </div>
+          <div class="col-sm-2 border">
+
+              <a class="btn btn-sm btn-primary" href="/" style="margin-top: 10px;"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+              <a class="btn btn-sm btn-primary" href="/regions/<%= region_id %>" style="margin-top: 10px;"><i class="fa fa-backward" aria-hidden="true"></i>Region</a>
+          </div>
+
+          <div class="col-sm-10 border pt-sm-2">
 
 
               <table class="table">
@@ -24,7 +32,7 @@
                   <tbody>
                       <% clients.forEach(function(client){ %>
                       <tr>
-                          <th scope="row"><a href="/clients/<%= client._id %>">View</a></th>
+                          <th scope="row"><a href="/regions/<%= region_id %>/categories/<%= client.category._id %>/clients/<%= client._id %>"><i class="fa fa-folder-open-o" aria-hidden="true"></i></a></th>
                           <td><%= client.name %></td>
                           <td><%= client.address %></td>
                           <td><%= client.phone %></td>
@@ -40,13 +48,9 @@
                   </tbody>
               </table>
 
-
-
-
-
-
-
           </div>
+
+
       </div>
   </div>
 

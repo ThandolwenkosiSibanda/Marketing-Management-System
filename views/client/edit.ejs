@@ -1,0 +1,123 @@
+  <% include ../partials/header.ejs %>
+
+  <div class="container">
+
+
+    
+      <form action="/clients/<%= client._id %>?_method=PUT" method="POST">
+          <div class="border form-divide-outer">
+              <div class="form-header">
+                  <h3 class="text-center">Edit <%= client.name %></h3>
+              </div>
+
+              <div class="border form-divide-inner">
+                  <h5><strong>Organisation Details</strong></h5>
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label for="name">Name</label>
+                          <input type="text" name="client[name]" id="name" class="form-control" value="<%= client.name %>">
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="address">Address</label>
+                      <input type="text" name="client[address]" id="address" class="form-control" value="<%= client.address %>">
+                  </div>
+                  <div class="form-row">
+                      <div class="form-group col-md-4">
+                          <label for="phone">Phone No.</label>
+                          <input type="text" name="client[phone]" id="phone" class="form-control" value="<%= client.phone %>">
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="altPhone">Alternative Phone No.</label>
+                          <input type="text" name="client[altPhone]" id="altPhone" class="form-control" value="<%= client.altPhone %>">
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="email">Email</label>
+                          <input type="email" name="client[email]" id="email" class="form-control" value="<%= client.email %>">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="border form-divide-inner">
+                  <h5><strong>Contact Person Details</strong> </h5>
+
+                  <div class="form-row">
+                      <div class="form-group col-md-2">
+                          <label for="inputCity">Title</label>
+                          <select id="contactTitle" name="client[contactTitle]" id="contactTitle" class="form-control">
+                              <option <% if(client.contactTitle === "Doctor") { %> selected <% }%> value="Doctor">Mr</option>
+                              <option <% if(client.contactTitle === "Mr") { %> selected <% }%> value="Mr">Mr</option>
+                              <option <% if(client.contactTitle === "Mrs") { %> selected <% }%> value="Mrs">Mrs</option>
+                              <option <% if(client.contactTitle === "Miss") { %> selected <% }%> value="Miss">Miss</option>
+                              <option <% if(client.contactTitle === "Pastor") { %> selected <% }%> value="Pastor">Pastor</option>
+                              <option <% if(client.contactTitle === "Proffessor") { %> selected <% }%> value="Proffessor">Proffessor</option>
+                          </select>
+                      </div>
+                      <div class="form-group col-md-3">
+                          <label for="contactName">Name</label>
+                          <input type="text" name="client[contactName]" id="contactName" class="form-control" value="<%= client.contactName %>">
+                      </div>
+                      <div class="form-group col-md-3">
+                          <label for="contactSurname">Surname</label>
+                          <input type="text" name="client[contactSurname]" id="contactSurname" class="form-control" value="<%= client.contactSurname %>">
+                      </div>
+                      <div class=" form-group col-md-4">
+                          <label for="contactPhone">Phone No.</label>
+                          <input type="text" name="client[contactPhone]" id="contactPhone" class="form-control" value="<%= client.contactPhone %>">
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="contactAltPhone">Alt Phone No.</label>
+                          <input type="text" name="client[contactAltPhone]" id="contactAltPhone" class="form-control" value="<%= client.contactAltPhone %>">
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="contactEmail">Email</label>
+                          <input type="email" name="client[contactEmail]" id="contactEmail" class="form-control" value="<%= client.contactEmail %>">
+                      </div>
+                  </div>
+              </div>
+              <div class="border form-divide-inner">
+                  <h5><strong>Market Details</strong> </h5>
+
+                  <div class="form-row">
+                      <div class="form-group col-md-4">
+                          <label for="region">Region Name</label>
+                          <select id="region" name="client[region]" id="region" class="form-control">
+                              <% regions.forEach(function(region){ %>
+
+                              <option <% if(client.region.name === region.name) { %> selected <% }%> value="<%= region._id %>"><%= region.name %></option>
+                              <% }); %>
+                          </select>
+                      </div>
+                      <div class="form-group col-md-4">
+                          <label for="category">Market Category</label>
+                          <select id="category" name="client[category]" id="category" class="form-control">
+                              <option selected>Choose...</option>
+                              <% categories.forEach(function(category){ %>
+                              <option value="<%= category._id %>"><%= category.name %></option>
+                              <option <% if(client.category.name === category.name) { %> selected <% }%> value="<%= category._id %>"><%= category.name %></option>
+
+                              <% }); %>
+                          </select>
+                      </div>
+
+
+
+                      <div class="form-group col-md-12">
+                          <label for="specialNotes">Special Notes</label>
+                          <textarea class="form-control" name="client[specialNotes]" id="specialNotes" rows="3"><%= client.specialNotes %> </textarea>
+                      </div>
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>Update</button>
+              <a href="/clients/<%= client._id%>" class="btn btn-sm btn-warning pull-right"><i class="fa fa-times" aria-hidden="true"></i>Cancel</a>
+          </div>
+      </form>
+
+
+  </div>
+
+
+
+
+  <% include ../partials/footer.ejs %>

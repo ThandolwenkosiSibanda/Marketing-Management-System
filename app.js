@@ -1,4 +1,5 @@
 var bodyParser = require('body-parser'),
+    methodOverride = require('method-override'),
     passport = require('passport'),
     localStrategy = require('passport-local'),
     passportLocalMongoose = require('passport-local-mongoose'),
@@ -63,11 +64,11 @@ mongoose.connect('mongodb://localhost:27017/MarketingManagementSystemDB', {
 // });
 
 app.set("view engine", "ejs");
-
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
 
 

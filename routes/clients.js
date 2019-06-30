@@ -7,21 +7,31 @@ var router = express.Router();
 
 // ===========================================================================================================================================
 //  Index
-// To Display All the Clients in the Database For A Given Region and Category
+// To Display All the categories in the Database For A Given Region and Category
 //============================================================================================================================================
 
-router.get('/clients', function (req, res) {
+router.get('/regions/:region_id/categories/:category_id', function (req, res) {
+    var region_id = req.params.region_id;
+    var category_id = req.params.category_id;
+
     Client.find({}).populate('region').populate('category').exec(function (err, clients) {
-        if (err) {
-            console.log("ERROR! in Retrieving Data From The Database")
-        } else {
-            res.render('client/index', {
-                clients: clients
-            });
+        var filteredClients = [];
+        clients.forEach(function (client) {
 
-        }
+            if ((client.region._id.equals(region_id)) && client.category._id.equals(category_id)) {
+                filteredClients.push(client);
+            }
 
+        });
+
+        res.render('category/index', {
+            clients: filteredClients,
+            region_id: region_id
+        });
     });
+
+
+
 
 });
 
@@ -80,15 +90,20 @@ router.post('/clients/', function (req, res) {
 //  Show
 //  Display the Full Details of a client
 //============================================================================================================================================
-router.get('/clients/:id', function (req, res) {
+router.get('/regions/:region_id/categories/:category_id/clients/:id', function (req, res) {
     var id = req.params.id;
+    var region_id = req.params.region_id;
+    var category_id = req.params.category_id;
 
     Client.findById(id).populate('region').populate('category').populate('visits').exec(function (err, foundClient) {
         if (err) {
             console.log('error');
         } else {
             res.render('client/show', {
-                client: foundClient
+                client: foundClient,
+                region_id: region_id,
+                category_id: category_id
+
             });
         }
     });
@@ -101,7 +116,34 @@ router.get('/clients/:id', function (req, res) {
 //  Show the Edit Form For The Client
 //============================================================================================================================================
 router.get('/clients/:id/edit', function (req, res) {
-    res.send('Show The Form for edit');
+    var id = req.params.id;
+
+    Client.findById(id).populate('region').populate('category').populate('visits').exec(function (err, foundClient) {
+
+        Category.find({}, function (err, categories) {
+            if (err) {
+                console.log("error");
+            } else {
+                Region.find({}, function (err, regions) {
+                    res.render('client/edit', {
+                        categories: categories,
+                        regions: regions,
+                        client: foundClient
+
+                    });
+                });
+
+            }
+        });
+
+
+
+
+
+
+
+
+    });
 });
 
 
@@ -109,9 +151,19 @@ router.get('/clients/:id/edit', function (req, res) {
 //  Update
 //  Update the Details of the Client
 //============================================================================================================================================
-router.post('/clients/:id', function (req, res) {
-    //Method PUT
-    res.send('Show The Form for edit');
+router.put('/clients/:id', function (req, res) {
+
+    var id = req.params.id;
+    Client.findByIdAndUpdate(id, req.body.client, function (err, updatedClient) {
+        if (err) {
+            console.log("ERROR! Updating the Record Please Try Again")
+        } else {
+            res.redirect('/clients/' + id);
+
+        }
+
+    });
+
 });
 
 

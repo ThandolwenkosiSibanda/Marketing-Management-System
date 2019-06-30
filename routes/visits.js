@@ -51,18 +51,21 @@ router.post('/visits', function (req, res) {
     Visit.create(visit, function (err, newVisit) {
         if (err) {
             return res.redirect('/visits/new');
-        }
-        Client.findById(id, function (err, foundClient) {
-            foundClient.visits.push(newVisit);
-            foundClient.save(function (err, data) {
-                if (err) {
-                    console.log(err);
-                    return res.redirect('/visits');
-                } else {
-                    return res.redirect('/visits');
-                }
+        } else {
+            Client.findById(id, function (err, foundClient) {
+
+                foundClient.visits.push(newVisit);
+                foundClient.save(function (err, data) {
+                    if (err) {
+                        console.log(err);
+                        return res.redirect('/clients');
+                    } else {
+
+                        return res.redirect('/clients/' + data._id);
+                    }
+                });
             });
-        });
+        }
 
     });
 });
@@ -73,7 +76,19 @@ router.post('/visits', function (req, res) {
 //  Display the Full Details of a client
 //============================================================================================================================================
 router.get('/visits/:id', function (req, res) {
-    res.send('Show the Client Full Details');
+    Visit.findById(req.params.id).populate('client').exec(function (err, visit) {
+        if (err) {
+            console.log("ERROR! in Retrieving Data From The Database")
+        } else {
+            res.render('visit/show', {
+                visit: visit
+            });
+
+        }
+
+
+
+    });
 
 });
 
@@ -83,8 +98,19 @@ router.get('/visits/:id', function (req, res) {
 //  Show the Edit Form For The Client
 //============================================================================================================================================
 router.get('/visits/:id/edit', function (req, res) {
-    res.send('Show The Form for edit');
+    Visit.findById(req.params.id).populate('client').exec(function (err, visit) {
+        if (err) {
+            console.log("ERROR! in Retrieving Data From The Database")
+        } else {
+            res.render('visit/edit', {
+                visit: visit
+            });
 
+        }
+
+
+
+    });
 
 });
 
@@ -93,9 +119,19 @@ router.get('/visits/:id/edit', function (req, res) {
 //  Update
 //  Update the Details of the Client
 //============================================================================================================================================
-router.post('/visits/:id', function (req, res) {
+router.put('/visits/:id', function (req, res) {
     //Method PUT
-    res.send('Show The Form for edit');
+    var id = req.params.id;
+    Visit.findByIdAndUpdate(id, req.body.visit, function (err, updatedVisit) {
+        if (err) {
+            console.log("ERROR! Updating the Record Please Try Again")
+        } else {
+            res.redirect('/visits/' + id);
+
+        }
+
+    });
+
 });
 
 

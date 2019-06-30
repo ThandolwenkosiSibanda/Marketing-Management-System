@@ -10,34 +10,34 @@ var router = express.Router();
 // To Display All the categories in the Database For A Given Region and Category
 //============================================================================================================================================
 
-router.get('/regions/:region_id/categories/:category_id', function (req, res) {
-    var region_id = req.params.region_id;
-    var category_id = req.params.category_id;
+// router.get('/regions/:region_id/categories/:category_id', function (req, res) {
+//     var region_id = req.params.region_id;
+//     var category_id = req.params.category_id;
 
-    Client.find({}).populate('region').populate('category').exec(function (err, clients) {
-        var filteredClients = [];
-        var region = clients[0].region.name;
-        var category = clients[0].category.name;
+//     Client.find({}).populate('region').populate('category').exec(function (err, clients) {
+//         var filteredClients = [];
+//         var region = clients[0].region;
+//         var category = clients[0].category;
 
-        clients.forEach(function (client) {
-
-
-            if (client.region._id.equals(region_id) && client.category._id.equals(category_id)) {
-                filteredClients.push(client);
-            }
-
-        });
-        res.render('category/index', {
-            clients: filteredClients,
-            region: region,
-            category: category
-        });
-    });
+//         clients.forEach(function (client) {
 
 
+//             if (client.region._id.equals(region_id) && client.category._id.equals(category_id)) {
+//                 filteredClients.push(client);
+//             }
+
+//         });
+//         res.render('category/index', {
+//             clients: filteredClients,
+//             region: region,
+//             category: category
+//         });
+//     });
 
 
-});
+
+
+// });
 
 
 // ===========================================================================================================================================
